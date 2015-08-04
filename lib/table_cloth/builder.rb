@@ -15,7 +15,7 @@ module TableCloth
 
       new.tap do |builder|
         builder.table     = table
-        builder.presenter = presenter.new(objects, table, view)
+        builder.presenter = presenter.new(objects, table, view, options)
       end
     end
 

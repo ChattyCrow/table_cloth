@@ -2,7 +2,7 @@ module TableCloth
   module Presenters
     class Default < ::TableCloth::Presenter
       def render_table
-        @render_table ||= ElementFactory::Element.new(:table, tag_options(:table)).tap do |table|
+        @render_table ||= ElementFactory::Element.new(:table, tag_options(:table).merge(table_html)).tap do |table|
           table << thead
           table << tbody
         end.to_html
@@ -26,7 +26,7 @@ module TableCloth
         @thead_row ||= ElementFactory::Element.new(:tr, tag_options(:tr)).tap do |row|
           columns.each do |column|
             th_options = column.options[:th_options] || {}
-            name = column.human_name(view_context)
+            name = column.human_name(view_context, klass, human_names)
             row << ElementFactory::Element.new(:th, tag_options(:th, th_options).merge(text: name))
           end
         end
@@ -51,6 +51,11 @@ module TableCloth
           value   = value.shift
 
           td_options.update(options)
+        end
+
+        # Add data attributes if responsive is true
+        if responsive
+          td_options[:"data-label"] = column.human_name(view_context, klass, human_names)
         end
 
         if value.html_safe?

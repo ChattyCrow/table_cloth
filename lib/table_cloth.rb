@@ -3,6 +3,10 @@ require "element_factory"
 require "active_support/core_ext/class"
 require "table_cloth/version"
 
+if defined?(::Rails)
+  require 'table_cloth/rails/engine'
+end
+
 module TableCloth
   autoload :Base, "table_cloth/base"
   autoload :Configuration, "table_cloth/configuration"

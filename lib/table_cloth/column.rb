@@ -15,11 +15,11 @@ module TableCloth
       end
     end
 
-    def human_name(view)
-      if options[:label].kind_of? Proc
+    def human_name(view, klass, human_names)
+      @human_name ||= if options[:label].kind_of? Proc
         view.instance_exec(&options[:label])
       else
-        options[:label] || name.to_s.humanize
+        options[:label] || human_names ? klass.human_attribute_name(name) : name.to_s.humanize
       end
     end
   end

@@ -1,11 +1,26 @@
 module TableCloth
   class Presenter
-    attr_reader :view_context, :objects, :table
+    attr_reader :view_context, :objects, :table, :klass, :human_names,
+      :responsive, :table_html
 
-    def initialize(objects, table, view)
+    def initialize(objects, table, view, options)
       @objects = objects
       @view_context = view
       @table = table.new(objects, view)
+
+      # Prepare for I18n localization in Rails
+      @klass = objects.first.class
+      @human_names = @klass.respond_to?(:human_attribute_name)
+
+      # Set responsive and html table inputs
+      @responsive  = options.delete(:responsive) || false
+      @table_html  = options.delete(:table_html) || {}
+
+      # If responsive add table class responsive_table
+      if responsive
+        @table_html[:class] = @table_html[:class].to_s
+        @table_html[:class] << ' responsive_table'
+      end
     end
 
     def render_table
