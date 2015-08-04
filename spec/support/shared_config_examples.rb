@@ -1,4 +1,4 @@
-shared_examples "table configuration" do
+shared_examples 'table configuration' do
   it 'tables have a class attached' do
     doc.at_xpath('//table')[:class].should include 'table2'
   end

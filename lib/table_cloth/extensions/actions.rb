@@ -1,10 +1,10 @@
 module TableCloth
   module Extensions
     module Actions
-      autoload :Action, "table_cloth/extensions/actions/action"
-      autoload :Column, "table_cloth/extensions/actions/column"
-      autoload :ActionCollection, "table_cloth/extensions/actions/action_collection"
-      autoload :Jury, "table_cloth/extensions/actions/jury"
+      autoload :Action, 'table_cloth/extensions/actions/action'
+      autoload :Column, 'table_cloth/extensions/actions/column'
+      autoload :ActionCollection, 'table_cloth/extensions/actions/action_collection'
+      autoload :Jury, 'table_cloth/extensions/actions/jury'
       extend ActiveSupport::Concern
 
       module ClassMethods

@@ -21,7 +21,7 @@ module TableCloth::Extensions::Actions
         return !table.send(action_unless)
       end
 
-      return true
+      true
     end
 
     private

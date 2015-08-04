@@ -6,18 +6,23 @@ describe TableCloth::Column do
   let(:dummy_model) { FactoryGirl.build(:dummy_model) }
 
   USER_EMAIL = 'User email'.freeze
+
+  # Dummy model for response to I18n
+  # human_attribute_name
   class ArModel
-    def human_attribute_name(name)
+    def human_attribute_name(*)
       USER_EMAIL
     end
   end
 
+  # Dummy model without human_attr_name
+  # method
   class NoArModel
   end
 
   context 'values' do
     let(:proc) do
-      lambda {|object, view| object.email.gsub("@", " at ")}
+      ->(object, _view) { object.email.gsub('@', ' at ') }
     end
 
     let(:name_column) { TableCloth::Column.new(:name) }
@@ -32,20 +37,20 @@ describe TableCloth::Column do
     end
   end
 
-  context "human name" do
-    it "returns the label when set" do
-      column = FactoryGirl.build(:column, options: { label: "Whatever" })
-      expect(column.human_name(view_context, NoArModel, false)).to eq("Whatever")
+  context 'human name' do
+    it 'returns the label when set' do
+      column = FactoryGirl.build(:column, options: { label: 'Whatever' })
+      expect(column.human_name(view_context, NoArModel, false)).to eq('Whatever')
     end
 
-    it "humanizes the symbol if no label is set" do
+    it 'humanizes the symbol if no label is set' do
       column = FactoryGirl.build(:column, name: :email)
-      expect(column.human_name(view_context, NoArModel, false)).to eq("Email")
+      expect(column.human_name(view_context, NoArModel, false)).to eq('Email')
     end
 
-    it "runs with a proc" do
-      column = FactoryGirl.build(:column, options: { label: Proc.new{ tag :span }} )
-      expect(column.human_name(view_context, NoArModel, false)).to eq("<span />")
+    it 'runs with a proc' do
+      column = FactoryGirl.build(:column, options: { label: -> { tag :span } })
+      expect(column.human_name(view_context, NoArModel, false)).to eq('<span />')
     end
 
     it 'returns human attribute name if it is possible' do

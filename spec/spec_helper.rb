@@ -6,13 +6,13 @@ require 'pry'
 require 'simplecov'
 require 'rspec/collection_matchers'
 
-if ENV["COVERAGE"] == "true"
+if ENV['COVERAGE'] == 'true'
   SimpleCov.start do
-    add_filter "spec/support"
+    add_filter 'spec/support'
   end
 end
 
-Dir['./spec/support/**/*.rb'].each {|f| require f }
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 FactoryGirl.find_definitions
 

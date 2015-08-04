@@ -24,15 +24,15 @@ module TableCloth
     end
 
     def render_table
-      raise NoMethodError, "You must override the .render method"
+      fail NoMethodError, 'You must override the .render method'
     end
 
     def thead
-      raise NoMethodError, "You must override the .header method"
+      fail NoMethodError, 'You must override the .header method'
     end
 
     def tbody
-      raise NoMethodError, "You must override the .rows method"
+      fail NoMethodError, 'You must override the .rows method'
     end
 
     def columns
@@ -56,7 +56,7 @@ module TableCloth
 
     private
 
-    def tag_options(type, options={})
+    def tag_options(type, options = {})
       options = options.dup
 
       if TableCloth.config.respond_to?(type)

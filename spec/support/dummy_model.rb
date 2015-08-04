@@ -1,5 +1,5 @@
 class DummyModel < Struct.new(:name, :email, :admin, :id)
   def admin?
-    !!admin
+    !admin.nil?
   end
 end

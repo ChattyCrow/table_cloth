@@ -8,7 +8,7 @@ module TableCloth
         block.call(table)
       else
         table_class = options.delete(:with)
-        table = table_class.kind_of?(String) ? table_class.constantize : table_class
+        table = table_class.is_a?(String) ? table_class.constantize : table_class
       end
 
       presenter = options.delete(:present_with) || table.presenter

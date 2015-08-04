@@ -4,18 +4,18 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'table_cloth/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "table_cloth"
+  gem.name          = 'table_cloth'
   gem.version       = TableCloth::VERSION
-  gem.authors       = ["Robert Ross"]
-  gem.email         = ["robert@creativequeries.com"]
-  gem.description   = %q{Table Cloth helps you create tables easily.}
-  gem.summary       = %q{Table Cloth provides an easy and intuitive DSL for creating tables for Rails views.}
-  gem.homepage      = "http://www.github.com/bobbytables/table_cloth"
+  gem.authors       = ['Robert Ross']
+  gem.email         = ['robert@creativequeries.com']
+  gem.description   = 'Table Cloth helps you create tables easily.'
+  gem.summary       = 'Table Cloth provides an easy and intuitive DSL for creating tables for Rails views.'
+  gem.homepage      = 'http://www.github.com/bobbytables/table_cloth'
 
   gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
+  gem.require_paths = %w(lib)
 
   gem.add_development_dependency('rspec', '~> 2.99.0')
   gem.add_development_dependency('rspec-collection_matchers')

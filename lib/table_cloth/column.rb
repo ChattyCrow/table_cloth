@@ -7,7 +7,7 @@ module TableCloth
       @options = options
     end
 
-    def value(object, view, table=nil)
+    def value(object, view, _table = nil)
       if options[:proc].respond_to?(:call)
         view.instance_exec(object, view, &options[:proc])
       else
