@@ -2,10 +2,20 @@ module TableCloth
   module Presenters
     class Default < ::TableCloth::Presenter
       def render_table
-        @render_table ||= ElementFactory::Element.new(:table, tag_options(:table).merge(table_html)).tap do |table|
-          table << thead
-          table << tbody
-        end.to_html
+        @render_table ||= pre_render
+      end
+
+      def pre_render
+        if @only_data
+          ret = []
+          objects.each { |object| ret << row_for_object(object).to_html }
+          ret.join('').html_safe
+        else
+          ElementFactory::Element.new(:table, tag_options(:table).merge(table_html)).tap do |table|
+            table << thead
+            table << tbody
+          end.to_html
+        end
       end
 
       def thead
@@ -16,7 +26,7 @@ module TableCloth
 
       def tbody
         @tbody ||= ElementFactory::Element.new(:tbody, tag_options(:tbody)).tap do |tbody|
-          objects.each {|object| tbody << row_for_object(object) }
+          objects.each { |object| tbody << row_for_object(object) }
         end
       end
 

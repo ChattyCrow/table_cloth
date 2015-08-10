@@ -1,7 +1,7 @@
 module TableCloth
   class Presenter
     attr_reader :view_context, :objects, :table, :klass, :human_names,
-      :responsive, :table_html
+      :responsive, :table_html, :only_data
 
     def initialize(objects, table, view, options)
       @objects = objects
@@ -15,6 +15,7 @@ module TableCloth
       # Set responsive and html table inputs
       @responsive  = options.delete(:responsive) || false
       @table_html  = options.delete(:table_html) || {}
+      @only_data   = options.delete(:only_data)  || false
 
       # If responsive add table class responsive_table
       if responsive
